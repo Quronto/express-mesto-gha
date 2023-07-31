@@ -1,7 +1,7 @@
 {
   "name": "express-mesto-gha",
   "version": "1.0.0",
-  "description": "Подготовка бэкенда к проекту Место",
+  "description": "подготовка бэкенда к фронтенд проекта Место",
   "main": "index.js",
   "scripts": {
     "lint": "npx eslint .",
@@ -9,7 +9,7 @@
     "dev": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Daniil",
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
@@ -22,4 +22,3 @@
     "nodemon": "^2.0.22"
   }
 }
-
