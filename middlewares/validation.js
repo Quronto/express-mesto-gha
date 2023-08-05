@@ -1,71 +1,61 @@
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
-
 const BedRequestError = require('../errors/BedRequestError');
 
 const validatorUrl = (url) => {
   if (!validator.isURL(url)) {
     throw new BedRequestError('Невалидный URL');
+  } else {
+    return url;
   }
-  return url;
 };
-
-const userIdValidator = Joi.string().required().hex().length(24);
-
-const urlValidator = Joi.string().required().custom(validatorUrl);
-
-const usernameValidator = Joi.string().min(2).max(30).required();
-
-const userInfoValidator = Joi.string().min(2).max(30);
-
-const passwordValidator = Joi.string().min(8).required();
 
 const validationCreateUser = celebrate({
   body: Joi.object().keys({
-    name: usernameValidator,
-    about: userInfoValidator,
-    avatar: urlValidator,
+    name: Joi.string().min(2).max(30),
+    about: Joi.string().min(2).max(30),
+    avatar: Joi.string().custom(validatorUrl),
     email: Joi.string().required().email(),
-    password: passwordValidator,
+    password: Joi.string().min(8).required(),
   }),
 });
 
 const validationLogin = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: passwordValidator,
+    password: Joi.string().min(8).required(),
   }),
 });
 
 const validationUserId = celebrate({
   params: Joi.object().keys({
-    userId: userIdValidator,
+    userId: Joi.string().required().hex().length(24),
   }),
 });
 
 const validationPatchProfile = celebrate({
   body: Joi.object().keys({
-    name: usernameValidator,
-    about: userInfoValidator,
+    name: Joi.string().min(2).max(30).required(),
+    about: Joi.string().min(2).max(30).required(),
   }),
 });
 
 const validationPatchAvatar = celebrate({
   body: Joi.object().keys({
-    avatar: urlValidator,
+    avatar: Joi.string().required().custom(validatorUrl),
   }),
 });
 
 const validationCreateCard = celebrate({
   body: Joi.object().keys({
-    name: usernameValidator,
-    link: urlValidator,
+    name: Joi.string().min(2).max(30).required(),
+    link: Joi.string().required().custom(validatorUrl),
   }),
 });
 
 const validationCardId = celebrate({
   params: Joi.object().keys({
-    cardId: userIdValidator,
+    cardId: Joi.string().required().hex().length(24),
   }),
 });
 
