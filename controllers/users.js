@@ -5,7 +5,7 @@ const User = require('../models/user');
 const ConflictError = require('../errors/ConflictError');
 const NotFoundError = require('../errors/NotFoundError');
 const BedRequestError = require('../errors/BedRequestError');
-const { JWT_SECRET } = require('../app');
+const { JWT_SECRET } = require('../middlewares/auth');
 
 const createUser = (req, res, next) => {
   const { password } = req.body;

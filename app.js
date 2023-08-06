@@ -4,10 +4,6 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
 
-const { JWT_SECRET } = process.env.JWT_SECRET;
-
-module.exports.JWT_SECRET = JWT_SECRET;
-
 const rateLimit = require('express-rate-limit');
 
 const generalError = require('./middlewares/generalError');
